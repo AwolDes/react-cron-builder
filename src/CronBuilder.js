@@ -18,6 +18,9 @@ const styleNameFactory = new BEMHelper('cron-builder');
 type Props = {
     cronExpression: string,
     showResult?: boolean,
+    showButton?: boolean,
+    showGeneratedExpression?: boolean,
+    activeTab?: number,
     onChange: Function
 };
 
@@ -42,12 +45,15 @@ export default class CronBuilder extends PureComponent {
     static defaultProps = {
         cronExpression: '* * * * *',
         showResult: true,
+        showButton: true,
+        showGeneratedExpression: false,
+        activeTab: 0,
         onChange: noop
     };
 
     constructor(props: Props, ctx: Object) {
         super(props, ctx);
-        const activeIndex = getActiveTabIndex(props);
+        const activeIndex = this.props.activeTab || getActiveTabIndex(props);
         this.state = {
             activeIndex,
             Component: components[activeIndex],
@@ -67,7 +73,7 @@ export default class CronBuilder extends PureComponent {
             generatedExpression: generateCronExpression(
                 this.presetComponent.getExpression()
             )
-        }, () => onChange(this.state.generatedExpression));
+        }, () => onChange({cron: this.state.generatedExpression, activeTab: this.state.activeIndex}));
     };
 
     selectTab = (activeIndex: number) => {
@@ -80,7 +86,7 @@ export default class CronBuilder extends PureComponent {
     };
 
     render() {
-        const {cronExpression, showResult} = this.props;
+        const {cronExpression, showResult, showButton} = this.props;
         const {activeIndex, Component, generatedExpression} = this.state;
         return (
             <div {...styleNameFactory()} >
@@ -112,18 +118,23 @@ export default class CronBuilder extends PureComponent {
                         styleNameFactory={styleNameFactory}
                         ref={(component: any) => this.presetComponent = component}
                         expression={parseCronExpression(cronExpression)}
+                        onChange={this.generateExpression}
                     />
                 </fieldset>
-                <div style={{textAlign: 'center'}} >
-                    <button
-                        type="button"
-                        {...styleNameFactory('action')}
-                        onClick={this.generateExpression}
-                        data-action
-                    >
-                        Generate cron expression
-                    </button>
-                </div>
+                <If condition={showButton}>
+                    <Then>
+                        <div style={{textAlign: 'center'}} >
+                            <button
+                                type="button"
+                                {...styleNameFactory('action')}
+                                onClick={this.generateExpression}
+                                data-action
+                            >
+                                Generate cron expression
+                            </button>
+                        </div>
+                    </Then>
+                </If>
                 <If condition={!!generatedExpression && showResult}>
                     <Then>
                         <div data-result >
@@ -131,11 +142,13 @@ export default class CronBuilder extends PureComponent {
                                 {...styleNameFactory('hr')}
                             />
                             <PrettyExpression expression={generatedExpression} />
-                            <div
-                                {...styleNameFactory('result')}
-                            >
-                                {generatedExpression}
-                            </div>
+                            {this.props.showGeneratedExpression && (
+                                <div
+                                    {...styleNameFactory('result')}
+                                >
+                                    {generatedExpression}
+                                </div>
+                            )}
                         </div>
                     </Then>
                 </If>

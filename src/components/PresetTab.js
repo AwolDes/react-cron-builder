@@ -71,31 +71,31 @@ export default class PresetTab extends PureComponent {
     selectMinutes = (value: string) => {
         this.setState({
             minutes: ensureValue(value)
-        })
+        }, () => this.props.onChange())
     };
 
     selectHours = (value: string) => {
         this.setState({
             hours: ensureValue(value)
-        })
+        }, () => this.props.onChange())
     };
 
     selectDayOfWeek = (value: string) => {
         this.setState({
             dayOfWeek: ensureArrayValue(value)
-        })
+        }, () => this.props.onChange())
     };
 
     selectDayOfMonth = (value: string) => {
         this.setState({
             dayOfMonth: ensureArrayValue(value)
-        })
+        }, () => this.props.onChange())
     };
 
     selectMonth = (value: string) => {
         this.setState({
             month: ensureArrayValue(value)
-        })
+        }, () => this.props.onChange())
     };
 
     changeDateType = () => {

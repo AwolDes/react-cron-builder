@@ -17,4 +17,9 @@ storiesOf('CronBuilder', module)
     .add('with predefined expression time frame', () => <CronBuilder
         cronExpression="30 9-18 * * 1-5"
         onChange={action('got expression')}
+    />)
+    .add('with predefined active tab', () => <CronBuilder
+        cronExpression="30 9-18 * * 1-5"
+        activeTab={2}
+        onChange={action('got expression')}
     />);

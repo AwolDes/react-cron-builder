@@ -12,6 +12,7 @@ import DateComponent, {DayOfMonth, Month} from './components/DateComponent'
 describe('PeriodicallyTab', () => {
     const expression = parseCronExpression('* * * * *');
     const styleNameFactory = jest.fn();
+    const onChange = jest.fn();
 
     it('initial rendering', () => {
         const wrapper = mount(<PeriodicallyTab
@@ -31,6 +32,7 @@ describe('PeriodicallyTab', () => {
         const wrapper = mount(<PeriodicallyTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         expect(wrapper.state().minutesMultiple).toBeFalsy();
@@ -48,6 +50,7 @@ describe('PeriodicallyTab', () => {
         const wrapper = mount(<PeriodicallyTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         expect(wrapper.state().hoursMultiple).toBeFalsy();
@@ -67,6 +70,7 @@ describe('PeriodicallyTab', () => {
         const wrapper = mount(<PeriodicallyTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         expect(wrapper.state().activeTime).toEqual(MINUTES);
@@ -82,6 +86,7 @@ describe('PeriodicallyTab', () => {
         const wrapper = mount(<PeriodicallyTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         wrapper.find(Select).at(0).props().onChange('2');
@@ -97,6 +102,7 @@ describe('PeriodicallyTab', () => {
         const wrapper = mount(<PeriodicallyTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         wrapper.find(DateComponent).find(Select).props().onChange([{
@@ -110,6 +116,7 @@ describe('PeriodicallyTab', () => {
         const wrapper = mount(<PeriodicallyTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         wrapper.find(DateComponent).find('select').simulate('change', {
@@ -128,6 +135,7 @@ describe('PeriodicallyTab', () => {
         const wrapper = mount(<PeriodicallyTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         wrapper.find(DateComponent).find('select').simulate('change', {

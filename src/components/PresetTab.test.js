@@ -5,11 +5,13 @@ import PresetTab, {ensureEveryOn} from './PresetTab'
 describe('PresetTab', () => {
     const expression = parseCronExpression('* * * * *');
     const styleNameFactory = jest.fn();
+    const onChange = jest.fn();
 
     it('should get expression', () => {
         const instance = new PresetTab({
             expression,
-            styleNameFactory
+            styleNameFactory,
+            onChange
         });
         expect(instance.getExpression()).toEqual({
             minutes: EVERY,

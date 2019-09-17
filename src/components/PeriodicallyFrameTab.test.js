@@ -10,6 +10,7 @@ import DateComponent, {DayOfMonth, Month} from './components/DateComponent'
 describe('PeriodicallyFrameTab', () => {
     const expression = parseCronExpression('* * * * *');
     const styleNameFactory = jest.fn();
+    const onChange = jest.fn();
 
     it('initial rendering', () => {
         const wrapper = mount(<PeriodicallyFrameTab
@@ -26,6 +27,7 @@ describe('PeriodicallyFrameTab', () => {
         const wrapper = mount(<PeriodicallyFrameTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
         wrapper.find('[data-multiple-switcher]').simulate('click');
         expect(wrapper.state().minutesMultiple).toBeTruthy();
@@ -39,6 +41,7 @@ describe('PeriodicallyFrameTab', () => {
         const wrapper = mount(<PeriodicallyFrameTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         wrapper.find(TimeInput).at(1).props().onChange('7');
@@ -52,6 +55,7 @@ describe('PeriodicallyFrameTab', () => {
         const wrapper = mount(<PeriodicallyFrameTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         wrapper.find(DateComponent).find(Select).props().onChange([{
@@ -65,6 +69,7 @@ describe('PeriodicallyFrameTab', () => {
         const wrapper = mount(<PeriodicallyFrameTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         wrapper.find(DateComponent).find('select').simulate('change', {
@@ -83,6 +88,7 @@ describe('PeriodicallyFrameTab', () => {
         const wrapper = mount(<PeriodicallyFrameTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         wrapper.find(DateComponent).find('select').simulate('change', {

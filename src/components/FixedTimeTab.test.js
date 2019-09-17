@@ -9,6 +9,7 @@ import DateComponent, {DayOfMonth, Month} from './components/DateComponent'
 describe('FixedTimeTab', () => {
     const expression = parseCronExpression('* * * * *');
     const styleNameFactory = jest.fn();
+    const onChange = jest.fn();
 
     it('initial rendering', () => {
         const wrapper = mount(<FixedTimeTab
@@ -23,6 +24,7 @@ describe('FixedTimeTab', () => {
         const wrapper = mount(<FixedTimeTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
         wrapper.find(Select).at(1).props().onChange({
             label: '2',
@@ -35,6 +37,7 @@ describe('FixedTimeTab', () => {
         const wrapper = mount(<FixedTimeTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
         wrapper.find(Select).at(0).props().onChange({
             label: '3',
@@ -47,6 +50,7 @@ describe('FixedTimeTab', () => {
         const wrapper = mount(<FixedTimeTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         wrapper.find(DateComponent).find(Select).props().onChange([{
@@ -60,6 +64,7 @@ describe('FixedTimeTab', () => {
         const wrapper = mount(<FixedTimeTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         wrapper.find(DateComponent).find('select').simulate('change', {
@@ -78,6 +83,7 @@ describe('FixedTimeTab', () => {
         const wrapper = mount(<FixedTimeTab
             styleNameFactory={styleNameFactory}
             expression={expression}
+            onChange={onChange}
         />);
 
         wrapper.find(DateComponent).find('select').simulate('change', {

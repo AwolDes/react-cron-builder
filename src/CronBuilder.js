@@ -73,7 +73,7 @@ export default class CronBuilder extends PureComponent {
             generatedExpression: generateCronExpression(
                 this.presetComponent.getExpression()
             )
-        }, () => onChange({cron: this.state.generatedExpression, activeTab: this.state.activeIndex}));
+        }, () => onChange({cronExpression: this.state.generatedExpression, activeTab: this.state.activeIndex}));
     };
 
     selectTab = (activeIndex: number) => {

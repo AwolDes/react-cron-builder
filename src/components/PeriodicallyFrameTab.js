@@ -76,12 +76,12 @@ export default class PeriodicallyFrameTab extends PresetTab {
                 this.setState({
                     hours: `${value}-${String(hoursTo)}`,
                     hoursFrom: value
-                })
+                }, () => this.props.onChange())
             } else {
                 this.setState({
                     hours: `${String(hoursFrom)}-${value}`,
                     hoursTo: value
-                })
+                }, () => this.props.onChange())
             }
         }
     };
